@@ -164,7 +164,7 @@
                     $('.row-offcanvas').toggleClass('active');
                  });
 
-                GetLastMeasurement().then(data => 
+                 apiGet("last").then(data => 
                     {
                         $("#monitor-date").html(data.datetime);
 

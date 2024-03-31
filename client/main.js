@@ -14,18 +14,19 @@ var category_mapping = [
     },
 ];
 
-function GetLastMeasurement(){
-   return $.get(`${API_URL}/last`);
-}
+function apiGet(endpoint, queryString){
+    var url = `${API_URL}/${endpoint}`;
 
-function getCssClassByCategory(category){
-    var foundClass = category_mapping.find(x => x.category == category);
-    return foundClass.class;
+    if (queryString){
+        url += `${url}?${queryString}`;
+    }
+
+   return $.get(url);
 }
 
 function renderMeasurementTilesInfo(key, data){
-    var cssClass = getCssClassByCategory(data[key].category);
-    $(`#${key}-card`).addClass(cssClass);
-    $(`#${key}-card-body`).addClass(cssClass);
+    var foundClass = category_mapping.find(x => x.category == data[key].category);
+    $(`#${key}-card`).addClass(foundClass.class);
+    $(`#${key}-card-body`).addClass(foundClass.class);
     $("#" + key).html(data[key].value);
 }

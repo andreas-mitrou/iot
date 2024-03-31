@@ -26,7 +26,10 @@ function apiGet(endpoint, queryString){
 
 function renderMeasurementTilesInfo(key, data){
     var foundClass = category_mapping.find(x => x.category == data[key].category);
-    $(`#${key}-card`).addClass(foundClass.class);
-    $(`#${key}-card-body`).addClass(foundClass.class);
+    if (foundClass){
+        $(`#${key}-card`).addClass(foundClass.class);
+        $(`#${key}-card-body`).addClass(foundClass.class);
+    }
+   
     $("#" + key).html(data[key].value);
 }
